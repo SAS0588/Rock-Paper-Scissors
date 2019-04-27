@@ -18,13 +18,23 @@
 
         <div id="choice">
           <h3>Choices</h3>
-          <button type="button" id="rock" class="objectChoice">Rock</button>
-          <button type="button" id="paper" class="objectChoice">Paper</button>
-          <button type="button" id="scissors" class="objectChoice">Scissors</button>
+          <div id="buttons">
+            <button type="button" id="rock" onclick="choices(this)" class="objectChoice">Rock</button>
+            <button type="button" id="paper" onclick="choices(this)" class="objectChoice">Paper</button>
+            <button type="button" id="scissors "onclick="choices(this)" class="objectChoice">Scissors</button>
+          </div>
+          
         </div>
 
         <div id="previous">
           <h3>Previous Choices</h3>
+          <h4 class="roundChoice">User</h4>
+          <p class="roundChoice">|</p>
+          <h4 class="roundChoice">Computer</h4>
+          <div id="prevChoices">
+            <p id="prevUserChoice" class="roundChoice">test</p>
+            <p id="prevCompChoice" class="roundChoice">test</p>
+          </div>
         </div>
 
 
