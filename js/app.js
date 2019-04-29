@@ -78,7 +78,7 @@ function previousChoices(){
     };
 };*/
 
-    if (data.userChoice.length == 1){
+    /* if (data.userChoice.length == 1){
         document.getElementById('prevUserChoice').innerHTML = 'No previous choice';
         document.getElementById('prevCompChoice').innerHTML = 'No previous choice';
     } else if (data.userChoice.length > 1){
@@ -88,7 +88,67 @@ function previousChoices(){
         data.computerChoice.map(function (elements){
             document.getElementById('prevCompChoice').innerHTML = '<p id="prevUserChoice" class="roundChoice">' + elements + '</p>';
         });
+    }; */
+    /* var parent, childUser, thing, para, node, div;
+    parent = document.getElementById('previous');
+    childUser = document.getElementById('prevChoices');
+    parent.removeChild(childUser);
+    thing = '.prevChoices';
+    if (data.userChoice.length == 1){
+        para = document.createElement('div');
+        para.classList.add('prevChoices');
+        node = document.createTextNode("No previous choice");
+        para.appendChild(node);
+        parent.appendChild(para);
+    } else if (data.userChoice.length > 1){
+        para = document.createElement('div');
+        para.classList.add('prevChoices');
+        data.userChoice.map(function (element){
+            document.querySelector(thing).insertAdjacentHTML('afterend', ("<p>" + element + "</p>"));
+        });
+    }; */
+
+/*  var newChildDiv;
+    var paraMessage;
+    //Delete Previous Divs
+    var parent = document.getElementById('previous');
+    var childDiv = document.getElementById('prevChoices');
+    parent.removeChild(childDiv);
+
+    //Determine if we have < 1 or > 1 items in our data
+    if (data.userChoice.length == 1){
+        //Append text for < 1 items
+        newChildDiv = document.createElement('div'); //creates a new div element
+        paraMessage = document.createTextNode('No Previous Choice'); //creates a new message to indicate no previous choices have been made
+        newChildDiv.setAttribute("id","prevChoices"); // adds id=prevChoices to div element
+        newChildDiv.appendChild(paraMessage); // adds paragraph to new div
+        parent.appendChild(newChildDiv); // new div element gets added to the parent node
+
+    } else if (data.userChoice.length > 1){
+        newChildDiv = document.createElement('div'); //creates a new div element
+        paraMessage = data.userChoice.map(function (element){
+            var newP = document.createElement('p');
+            var data = document.createTextNode(element);
+            newP.appendChild(data);
+        })
+        newChildDiv.setAttribute("id","prevChoices"); // adds id=prevChoices to div element
+        newChildDiv.appendChild(paraMessage); // adds paragraph to new div
+        parent.appendChild(newChildDiv); // new div element gets added to the parent node
+    }; */
+
+    if (data.userChoice.length == 1){
+        //Append text for < 1 items
+        document.getElementById('prevUserChoice').innerHTML = 'No previous choice';
+        document.getElementById('prevCompChoice').innerHTML = 'No previous choice'; 
+    } else if (data.userChoice.length > 1){
+        
     };
+    
+
+ 
+
+
+
 };
 
 /* const yoyos = ['A','B','C'];
