@@ -69,13 +69,29 @@ function generateComputerChoice(){
 };
 
 function previousChoices(){
-    if (data.userChoice.length == 1){
+/*     if (data.userChoice.length == 1){
         document.getElementById('prevUserChoice').innerHTML = 'No previous choice';
         document.getElementById('prevCompChoice').innerHTML = 'No previous choice';           
     } else if (data.userChoice.length > 1) {
-        document.getElementById('prevUserChoice').innerHTML = data.userChoice[data.userChoice.length - 2];
-        document.getElementById('prevCompChoice').innerHTML = data.computerChoice[data.computerChoice.length - 2];
+        document.getElementById('prevUserChoice').innerHTML = "<p>" + data.userChoice[data.userChoice.length - 2] + "</p>";
+        document.getElementById('prevCompChoice').innerHTML = "<p>" + data.computerChoice[data.computerChoice.length - 2] + "</p>"; 
+    };
+};*/
+
+    if (data.userChoice.length == 1){
+        document.getElementById('prevUserChoice').innerHTML = 'No previous choice';
+        document.getElementById('prevCompChoice').innerHTML = 'No previous choice';
+    } else if (data.userChoice.length > 1){
+        data.userChoice.map(function (elements){
+            document.getElementById('prevUserChoice').innerHTML = '<p id="prevUserChoice" class="roundChoice">' + elements + '</p>';
+        });
+        data.computerChoice.map(function (elements){
+            document.getElementById('prevCompChoice').innerHTML = '<p id="prevUserChoice" class="roundChoice">' + elements + '</p>';
+        });
     };
 };
 
-
+/* const yoyos = ['A','B','C'];
+yoyos.map(function (yoyo){
+    console.log(yoyo + 'mapped');
+}); */
