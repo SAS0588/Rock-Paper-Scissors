@@ -1,29 +1,3 @@
-/* // Store the choices
-const choice =  {
-    rock: document.getElementById('rock').innerHTML,
-    paper: document.getElementById('paper').innerHTML,
-    scissors: document.getElementById('scissors').innerHTML
-};
-
-// Set up event listeners
-document.getElementById('rock').addEventListener('click', function(){
-    choiceMade(choice.rock);
-});
-document.getElementById('paper').addEventListener('click', function(){
-    choiceMade(choice.paper);
-});
-document.getElementById('scissors').addEventListener('click', function(){
-    choiceMade(choice.scissors);
-});
-
-// Update view to show the chosen option
-function choiceMade(element){
-    console.log(element);
-} */
-
-/* function choices(x) {
-    console.log(x.id);
-} */
 
 /* Phase 1
 1. Set up event listeners to receive input from choices. (controller)
@@ -31,52 +5,114 @@ function choiceMade(element){
 3. Update the view to show the chosen option. (view)
 */
 
+/* Phase 2
+1. Generate the past 5 choices for both user and computer
+2. Choose a winner
+3. Keep score
+*/
+
 const data = {
     userChoice: [],
-    computerChoice: []
+    computerChoice: [],
+    userChoiceID: [],
+    computerChoiceID: []
 };
 
 function choices(x) {
-    data.userChoice[data.userChoice.length] = x.id; // this passes in the id of the html dom element button.
+    data.userChoice[data.userChoice.length] = x.id; // this passes in the id of the html dom element button as a STRING.
+    if (x.id == 'rock'){
+        data.userChoiceID[data.userChoiceID.length] = 1;
+        //console.log(data.userChoiceID);
+    } else if (x.id == 'paper'){
+        data.userChoiceID[data.userChoiceID.length] = 2;
+        //console.log(data.userChoiceID);
+    } else if (x.id == 'scissors') {
+        data.userChoiceID[data.userChoiceID.length] = 3;
+        //console.log(data.userChoiceID);
+    }
     generateComputerChoice();
 };
 
 function updateView(){
-    console.log('userChoice: ' + data.userChoice);
-    console.log('computerChoice: ' + data.computerChoice);
-    document.getElementById('userGameDisplay').innerHTML = data.userChoice[data.userChoice.length - 1];
+    //console.log('userChoice: ' + data.userChoice);
+    //console.log('computerChoice: ' + data.computerChoice);
+    document.getElementById('userGameDisplay').innerHTML = data.userChoice[data.userChoice.length - 1]; // sets the inner element of #userGameDisplay to array item.
     document.getElementById('compGameDisplay').innerHTML = data.computerChoice[data.computerChoice.length - 1];
     previousChoices();
 };
 
 function generateComputerChoice(){
-    let x = Math.floor((Math.random() * 3) + 1);
-    switch(x){
+    let y = Math.floor((Math.random() * 3) + 1);
+    switch(y){
         case 1:
-            data.computerChoice[data.computerChoice.length] = 'rock';
+            data.computerChoice[data.computerChoice.length] = 'rock'; // this passes in 'rock' into the data object as a STRING.
+            data.computerChoiceID[data.computerChoiceID.length] = y;
+            //console.log(data.computerChoiceID);
             break;
         case 2:
-            data.computerChoice[data.computerChoice.length] = 'paper';
+            data.computerChoice[data.computerChoice.length] = 'paper'; // this passes in 'paper' into the data object as a STRING.
+            data.computerChoiceID[data.computerChoiceID.length] = y;
+            //console.log(data.computerChoiceID);
             break;
         case 3:
-            data.computerChoice[data.computerChoice.length] = 'scissors';
+            data.computerChoice[data.computerChoice.length] = 'scissors'; // this passes in 'scissors' into the data object as a STRING.
+            data.computerChoiceID[data.computerChoiceID.length] = y;
+            //console.log(data.computerChoiceID);
             break;
         default:
-        document.getElementById('.compGameDisplay').innerHTML = 'Error';
+        document.getElementById('.compGameDisplay').innerHTML = 'Error'; // this passes in 'error' into the data object as a STRING.
     };
+    chooseWinner(y);
     updateView();
     
 };
 
+function chooseWinner(compChoice){
+    if (data.userChoiceID[data.userChoiceID.length-1] == 1 && compChoice == 1){
+        console.log('issa tie!');
+    } else if (data.userChoiceID[data.userChoiceID.length-1] == 1 && compChoice == 2){
+        console.log('Computer Wins!');
+    } else if (data.userChoiceID[data.userChoiceID.length-1] == 1 && compChoice == 3){
+        console.log('User Wins!');
+    } else if (data.userChoiceID[data.userChoiceID.length-1] == 2 && compChoice == 1){
+        console.log('User Wins!');
+    } else if (data.userChoiceID[data.userChoiceID.length-1] == 2 && compChoice == 2){
+        console.log('issa tie!');
+    } else if (data.userChoiceID[data.userChoiceID.length-1] == 2 && compChoice == 3){
+        console.log('Computer Wins!');
+    } else if (data.userChoiceID[data.userChoiceID.length-1] == 3 && compChoice == 1){
+        console.log('Computer Wins!');
+    } else if (data.userChoiceID[data.userChoiceID.length-1] == 3 && compChoice == 2){
+        console.log('User Wins!');
+    } else if (data.userChoiceID[data.userChoiceID.length-1] == 3 && compChoice == 3){
+        console.log('issa tie!');
+    }
+
+};
+
 function previousChoices(){
-/*     if (data.userChoice.length == 1){
+
+    if (data.userChoice.length == 1){
         document.getElementById('prevUserChoice').innerHTML = 'No previous choice';
         document.getElementById('prevCompChoice').innerHTML = 'No previous choice';           
     } else if (data.userChoice.length > 1) {
         document.getElementById('prevUserChoice').innerHTML = "<p>" + data.userChoice[data.userChoice.length - 2] + "</p>";
         document.getElementById('prevCompChoice').innerHTML = "<p>" + data.computerChoice[data.computerChoice.length - 2] + "</p>"; 
     };
-};*/
+
+    // Tests for trying to get last 5 throws to show up on page.
+
+    // Test 1 - successful, but I could only get the last previous item to show up.
+
+    /*     if (data.userChoice.length == 1){
+        document.getElementById('prevUserChoice').innerHTML = 'No previous choice';
+        document.getElementById('prevCompChoice').innerHTML = 'No previous choice';           
+    } else if (data.userChoice.length > 1) {
+        document.getElementById('prevUserChoice').innerHTML = "<p>" + data.userChoice[data.userChoice.length - 2] + "</p>";
+        document.getElementById('prevCompChoice').innerHTML = "<p>" + data.computerChoice[data.computerChoice.length - 2] + "</p>"; 
+    };*/
+
+    // Test 2 - successful, but i could only print out the previous item to show up using map function
 
     /* if (data.userChoice.length == 1){
         document.getElementById('prevUserChoice').innerHTML = 'No previous choice';
@@ -89,6 +125,9 @@ function previousChoices(){
             document.getElementById('prevCompChoice').innerHTML = '<p id="prevUserChoice" class="roundChoice">' + elements + '</p>';
         });
     }; */
+
+    // Test 3 - Failed, could not delete previous child and replace with new child
+
     /* var parent, childUser, thing, para, node, div;
     parent = document.getElementById('previous');
     childUser = document.getElementById('prevChoices');
@@ -107,6 +146,8 @@ function previousChoices(){
             document.querySelector(thing).insertAdjacentHTML('afterend', ("<p>" + element + "</p>"));
         });
     }; */
+
+    // Test 4 - Failed, got a return of null when creating items greater than 1
 
 /*  var newChildDiv;
     var paraMessage;
@@ -135,21 +176,10 @@ function previousChoices(){
         newChildDiv.appendChild(paraMessage); // adds paragraph to new div
         parent.appendChild(newChildDiv); // new div element gets added to the parent node
     }; */
-
-    if (data.userChoice.length == 1){
-        //Append text for < 1 items
-        document.getElementById('prevUserChoice').innerHTML = 'No previous choice';
-        document.getElementById('prevCompChoice').innerHTML = 'No previous choice'; 
-    } else if (data.userChoice.length > 1){
-        
-    };
-    
-
- 
-
-
-
 };
+
+
+ // Map method example
 
 /* const yoyos = ['A','B','C'];
 yoyos.map(function (yoyo){
