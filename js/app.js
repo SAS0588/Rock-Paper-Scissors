@@ -11,177 +11,98 @@
 3. Keep score
 */
 
+// Data Structure
 const data = {
     userChoice: [],
-    computerChoice: [],
-    userChoiceID: [],
-    computerChoiceID: []
+    computerChoice: []
 };
 
-function choices(x) {
-    data.userChoice[data.userChoice.length] = x.id; // this passes in the id of the html dom element button as a STRING.
-    if (x.id == 'rock'){
-        data.userChoiceID[data.userChoiceID.length] = 1;
-        //console.log(data.userChoiceID);
-    } else if (x.id == 'paper'){
-        data.userChoiceID[data.userChoiceID.length] = 2;
-        //console.log(data.userChoiceID);
-    } else if (x.id == 'scissors') {
-        data.userChoiceID[data.userChoiceID.length] = 3;
-        //console.log(data.userChoiceID);
-    }
-    generateComputerChoice();
-};
-
-function updateView(){
-    //console.log('userChoice: ' + data.userChoice);
-    //console.log('computerChoice: ' + data.computerChoice);
-    document.getElementById('userGameDisplay').innerHTML = data.userChoice[data.userChoice.length - 1]; // sets the inner element of #userGameDisplay to array item.
-    document.getElementById('compGameDisplay').innerHTML = data.computerChoice[data.computerChoice.length - 1];
+function controller(x) {
+    let player = setUserChoice(x);
+    let computer = generateComputerChoice();
+    console.log('user = ' + player + ' ' + 'computer = ' + computer);
+    chooseWinner(player, computer);
+    updateView(player, computer);
     previousChoices();
 };
 
-function generateComputerChoice(){
+function setUserChoice(x) {
+    data.userChoice[data.userChoice.length] = x.id; // this passes in the id of the html dom element button as a STRING.
+    return x.id;
+}
+
+function generateComputerChoice() {
+    let computerGeneratedChoice;
     let y = Math.floor((Math.random() * 3) + 1);
-    switch(y){
+    switch (y) {
         case 1:
-            data.computerChoice[data.computerChoice.length] = 'rock'; // this passes in 'rock' into the data object as a STRING.
-            data.computerChoiceID[data.computerChoiceID.length] = y;
-            //console.log(data.computerChoiceID);
+            computerGeneratedChoice = 'rock';
+            data.computerChoice[data.computerChoice.length] = computerGeneratedChoice;
             break;
         case 2:
-            data.computerChoice[data.computerChoice.length] = 'paper'; // this passes in 'paper' into the data object as a STRING.
-            data.computerChoiceID[data.computerChoiceID.length] = y;
-            //console.log(data.computerChoiceID);
+            computerGeneratedChoice = 'paper';
+            data.computerChoice[data.computerChoice.length] = computerGeneratedChoice;
             break;
         case 3:
-            data.computerChoice[data.computerChoice.length] = 'scissors'; // this passes in 'scissors' into the data object as a STRING.
-            data.computerChoiceID[data.computerChoiceID.length] = y;
-            //console.log(data.computerChoiceID);
+            computerGeneratedChoice = 'scissors';
+            data.computerChoice[data.computerChoice.length] = computerGeneratedChoice;
             break;
-        default:
-        document.getElementById('.compGameDisplay').innerHTML = 'Error'; // this passes in 'error' into the data object as a STRING.
     };
-    chooseWinner(y);
-    updateView();
-    
-};
-
-function chooseWinner(compChoice){
-    if (data.userChoiceID[data.userChoiceID.length-1] == 1 && compChoice == 1){
-        console.log('issa tie!');
-    } else if (data.userChoiceID[data.userChoiceID.length-1] == 1 && compChoice == 2){
-        console.log('Computer Wins!');
-    } else if (data.userChoiceID[data.userChoiceID.length-1] == 1 && compChoice == 3){
-        console.log('User Wins!');
-    } else if (data.userChoiceID[data.userChoiceID.length-1] == 2 && compChoice == 1){
-        console.log('User Wins!');
-    } else if (data.userChoiceID[data.userChoiceID.length-1] == 2 && compChoice == 2){
-        console.log('issa tie!');
-    } else if (data.userChoiceID[data.userChoiceID.length-1] == 2 && compChoice == 3){
-        console.log('Computer Wins!');
-    } else if (data.userChoiceID[data.userChoiceID.length-1] == 3 && compChoice == 1){
-        console.log('Computer Wins!');
-    } else if (data.userChoiceID[data.userChoiceID.length-1] == 3 && compChoice == 2){
-        console.log('User Wins!');
-    } else if (data.userChoiceID[data.userChoiceID.length-1] == 3 && compChoice == 3){
-        console.log('issa tie!');
-    }
+    return computerGeneratedChoice;
 
 };
 
-function previousChoices(){
-
-    if (data.userChoice.length == 1){
-        document.getElementById('prevUserChoice').innerHTML = 'No previous choice';
-        document.getElementById('prevCompChoice').innerHTML = 'No previous choice';           
-    } else if (data.userChoice.length > 1) {
-        document.getElementById('prevUserChoice').innerHTML = "<p>" + data.userChoice[data.userChoice.length - 2] + "</p>";
-        document.getElementById('prevCompChoice').innerHTML = "<p>" + data.computerChoice[data.computerChoice.length - 2] + "</p>"; 
+function chooseWinner(human, ai) {
+    if (human === 'rock') {
+        if (ai === 'rock') {
+            document.getElementById('gameResult').innerHTML = 'It\'s a tie!';
+        } else if (ai === 'paper') {
+            document.getElementById('gameResult').innerHTML = 'computer wins';
+        } else if (ai === 'scissors') {
+            document.getElementById('gameResult').innerHTML = 'human wins';
+        };
+    } else if (human === 'paper') {
+        if (ai === 'rock') {
+            document.getElementById('gameResult').innerHTML = 'human wins';
+        } else if (ai === 'paper') {
+            document.getElementById('gameResult').innerHTML = 'It\'s a tie!';
+        } else if (ai === 'scissors') {
+            document.getElementById('gameResult').innerHTML = 'computer wins';
+        };
+    } else if (human === 'scissors') {
+        if (ai === 'rock') {
+            document.getElementById('gameResult').innerHTML = 'computer wins';
+        } else if (ai === 'paper') {
+            document.getElementById('gameResult').innerHTML = 'human wins';
+        } else if (ai === 'scissors') {
+            document.getElementById('gameResult').innerHTML = 'It\'s a tie!';
+        };
     };
+};
 
-    // Tests for trying to get last 5 throws to show up on page.
+function updateView(user, comp) {
+    document.getElementById('userGameDisplay').innerHTML = user;  // sets the inner element of #userGameDisplay to array item.
+    document.getElementById('compGameDisplay').innerHTML = comp;
+};
 
-    // Test 1 - successful, but I could only get the last previous item to show up.
+function previousChoices() {
 
-    /*     if (data.userChoice.length == 1){
-        document.getElementById('prevUserChoice').innerHTML = 'No previous choice';
-        document.getElementById('prevCompChoice').innerHTML = 'No previous choice';           
-    } else if (data.userChoice.length > 1) {
-        document.getElementById('prevUserChoice').innerHTML = "<p>" + data.userChoice[data.userChoice.length - 2] + "</p>";
-        document.getElementById('prevCompChoice').innerHTML = "<p>" + data.computerChoice[data.computerChoice.length - 2] + "</p>"; 
-    };*/
-
-    // Test 2 - successful, but i could only print out the previous item to show up using map function
-
-    /* if (data.userChoice.length == 1){
+    if (data.userChoice.length == 1) {
         document.getElementById('prevUserChoice').innerHTML = 'No previous choice';
         document.getElementById('prevCompChoice').innerHTML = 'No previous choice';
-    } else if (data.userChoice.length > 1){
-        data.userChoice.map(function (elements){
-            document.getElementById('prevUserChoice').innerHTML = '<p id="prevUserChoice" class="roundChoice">' + elements + '</p>';
-        });
-        data.computerChoice.map(function (elements){
-            document.getElementById('prevCompChoice').innerHTML = '<p id="prevUserChoice" class="roundChoice">' + elements + '</p>';
-        });
-    }; */
-
-    // Test 3 - Failed, could not delete previous child and replace with new child
-
-    /* var parent, childUser, thing, para, node, div;
-    parent = document.getElementById('previous');
-    childUser = document.getElementById('prevChoices');
-    parent.removeChild(childUser);
-    thing = '.prevChoices';
-    if (data.userChoice.length == 1){
-        para = document.createElement('div');
-        para.classList.add('prevChoices');
-        node = document.createTextNode("No previous choice");
-        para.appendChild(node);
-        parent.appendChild(para);
-    } else if (data.userChoice.length > 1){
-        para = document.createElement('div');
-        para.classList.add('prevChoices');
-        data.userChoice.map(function (element){
-            document.querySelector(thing).insertAdjacentHTML('afterend', ("<p>" + element + "</p>"));
-        });
-    }; */
-
-    // Test 4 - Failed, got a return of null when creating items greater than 1
-
-/*  var newChildDiv;
-    var paraMessage;
-    //Delete Previous Divs
-    var parent = document.getElementById('previous');
-    var childDiv = document.getElementById('prevChoices');
-    parent.removeChild(childDiv);
-
-    //Determine if we have < 1 or > 1 items in our data
-    if (data.userChoice.length == 1){
-        //Append text for < 1 items
-        newChildDiv = document.createElement('div'); //creates a new div element
-        paraMessage = document.createTextNode('No Previous Choice'); //creates a new message to indicate no previous choices have been made
-        newChildDiv.setAttribute("id","prevChoices"); // adds id=prevChoices to div element
-        newChildDiv.appendChild(paraMessage); // adds paragraph to new div
-        parent.appendChild(newChildDiv); // new div element gets added to the parent node
-
-    } else if (data.userChoice.length > 1){
-        newChildDiv = document.createElement('div'); //creates a new div element
-        paraMessage = data.userChoice.map(function (element){
-            var newP = document.createElement('p');
-            var data = document.createTextNode(element);
-            newP.appendChild(data);
-        })
-        newChildDiv.setAttribute("id","prevChoices"); // adds id=prevChoices to div element
-        newChildDiv.appendChild(paraMessage); // adds paragraph to new div
-        parent.appendChild(newChildDiv); // new div element gets added to the parent node
-    }; */
+    } else if (data.userChoice.length > 1) {
+        // document.getElementById('prevUserChoice').innerHTML = data.userChoice[data.userChoice.length - 2];
+        document.getElementById('prevUserChoice').innerHTML = populateHistoryDisplay();
+        document.getElementById('prevCompChoice').innerHTML = data.computerChoice[data.computerChoice.length - 2];
+    };
 };
 
-
- // Map method example
-
-/* const yoyos = ['A','B','C'];
-yoyos.map(function (yoyo){
-    console.log(yoyo + 'mapped');
-}); */
+function populateHistoryDisplay(){
+    var lastFiveRounds = "";
+    var arrayLen = data.userChoice.length;
+    var limitOfFive = data.userChoice.length > 4 ? 0 : data.userChoice.length-5;
+    for (i = data.userChoice.length-1; i > limitOfFive; i--) { 
+        lastFiveRounds += data.userChoice[i] + "\n";
+      }
+    return lastFiveRounds;
+}

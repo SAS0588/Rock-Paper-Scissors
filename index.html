@@ -12,6 +12,7 @@
 
         <div id="gameplay">
           <h3>Gameplay</h3>
+          <p id="gameResult"></p>
           <p id="userGameDisplay" class="roundChoice"></p>
           <p id="compGameDisplay" class="roundChoice"></p>
         </div>
@@ -19,9 +20,9 @@
         <div id="choice">
           <h3>Choices</h3>
           <div id="buttons">
-            <button type="button" id="rock" onclick="choices(this)" class="objectChoice">Rock</button>
-            <button type="button" id="paper" onclick="choices(this)" class="objectChoice">Paper</button>
-            <button type="button" id="scissors "onclick="choices(this)" class="objectChoice">Scissors</button>
+            <button type="button" id="rock" onclick="controller(this)" class="objectChoice">Rock</button>
+            <button type="button" id="paper" onclick="controller(this)" class="objectChoice">Paper</button>
+            <button type="button" id="scissors" onclick="controller(this)" class="objectChoice">Scissors</button>
           </div>
           
         </div>
