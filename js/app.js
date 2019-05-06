@@ -92,17 +92,27 @@ function previousChoices() {
         document.getElementById('prevCompChoice').innerHTML = 'No previous choice';
     } else if (data.userChoice.length > 1) {
         // document.getElementById('prevUserChoice').innerHTML = data.userChoice[data.userChoice.length - 2];
-        document.getElementById('prevUserChoice').innerHTML = populateHistoryDisplay();
-        document.getElementById('prevCompChoice').innerHTML = data.computerChoice[data.computerChoice.length - 2];
+        document.getElementById('prevUserChoice').innerHTML = populateUserHistoryDisplay();
+        document.getElementById('prevCompChoice').innerHTML = populateCompHistoryDisplay();
     };
 };
 
-function populateHistoryDisplay(){
-    var lastFiveRounds = "";
+function populateUserHistoryDisplay(){
+    var lastFiveUserRounds = "";
     var arrayLen = data.userChoice.length;
-    var limitOfFive = data.userChoice.length > 4 ? 0 : data.userChoice.length-5;
+    var limitOfFive = data.userChoice.length > 5 ? 0 : data.userChoice.length-5;
     for (i = data.userChoice.length-1; i > limitOfFive; i--) { 
-        lastFiveRounds += data.userChoice[i] + "\n";
+        lastFiveUserRounds += "<p>" + data.userChoice[i] + "</p>";
       }
-    return lastFiveRounds;
+    return lastFiveUserRounds;
+}
+
+function populateCompHistoryDisplay(){
+    var lastFiveCompRounds = "";
+    var arrayLen = data.computerChoice.length;
+    var limitOfFive = data.computerChoice.length > 5 ? 0 : data.computerChoice.length-5;
+    for (i = data.computerChoice.length-1; i > limitOfFive; i--) { 
+        lastFiveCompRounds += "<p>" + data.computerChoice[i] + "</p>";
+      }
+    return lastFiveCompRounds;
 }
