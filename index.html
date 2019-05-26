@@ -1,51 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Rock Paper Scissors</title>
-        <link type="text/css" rel="stylesheet" href="css/style.css">
 
-    </head>
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <!-- Bootstrap4 -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
 
-    <body>
-      <div class="container">
-        <h1>Rock - Paper - Scissors</h1>
-
-        <div id="gameplay">
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 head">
+        <div id="title">
+          <h1>Rock - Paper - Scissors</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="gameplay">
           <h3>Gameplay</h3>
           <p id="gameResult"></p>
           <p id="userGameDisplay" class="roundChoice"></p>
           <p id="compGameDisplay" class="roundChoice"></p>
         </div>
-
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-4">
         <div id="choice">
-          <h3>Choices</h3>
           <div id="buttons">
             <button type="button" id="rock" onclick="controller(this)" class="objectChoice">Rock</button>
             <button type="button" id="paper" onclick="controller(this)" class="objectChoice">Paper</button>
             <button type="button" id="scissors" onclick="controller(this)" class="objectChoice">Scissors</button>
           </div>
-          
         </div>
-
+      </div>
+      <div class="col-sm-4">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
         <div id="previous">
           <h3>Previous Choices</h3>
-          <h4 class="roundChoice">User</h4>
-          <p class="roundChoice">|</p>
-          <h4 class="roundChoice">Computer</h4>
-          <div id="prevChoices">
-            <div id="userDiv">
-                <p id="prevUserChoice" class="roundChoice prevRoundChoice"></p>
-            </div>
-            <div id="compDiv">
-                <p id="prevCompChoice" class="roundChoice prevRoundChoice"></p>
-            </div>
-          </div>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div id="prevChoices" class="col-sm-6">
+        <h4 class="roundChoice">User</h4>
+      </div>
+      <div class="col-sm-6">
+        <h4 class="roundChoice">Computer</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6" id="userDiv">
+        <p id="prevUserChoice" class="roundChoice prevRoundChoice">TEST</p>
+      </div>
+      <div class="col-sm-6" id="compDiv">
+        <p id="prevCompChoice" class="roundChoice prevRoundChoice">TEST</p>
+      </div>
+    </div>
+  </div>
 
 
+  <!-- JavaScript -->
+  <script src="js/app.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+  </div>
+</body>
 
-        <script src="js/app.js"></script>
-        </div>
-    </body>
 </html>

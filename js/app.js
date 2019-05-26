@@ -17,6 +17,7 @@ const data = {
     computerChoice: []
 };
 
+// Main controller function for program. This is where we call other functions and drive through the app.
 function controller(x) {
     let player = setUserChoice(x);
     let computer = generateComputerChoice();
@@ -26,11 +27,13 @@ function controller(x) {
     previousChoices();
 };
 
+// grabs user's button choice
 function setUserChoice(x) {
     data.userChoice[data.userChoice.length] = x.id; // this passes in the id of the html dom element button as a STRING.
     return x.id;
 }
 
+// creates a random number and then assigns a choice to the computer
 function generateComputerChoice() {
     let computerGeneratedChoice;
     let y = Math.floor((Math.random() * 3) + 1);
@@ -52,6 +55,7 @@ function generateComputerChoice() {
 
 };
 
+// Compare human choice vs computer choice and declare a winner.
 function chooseWinner(human, ai) {
     if (human === 'rock') {
         if (ai === 'rock') {
@@ -80,11 +84,13 @@ function chooseWinner(human, ai) {
     };
 };
 
+// DOM view of the choices both user and computer made.
 function updateView(user, comp) {
     document.getElementById('userGameDisplay').innerHTML = user;  // sets the inner element of #userGameDisplay to array item.
     document.getElementById('compGameDisplay').innerHTML = comp;
 };
 
+// Shows the past 5 choices both computer and user have picked.
 function previousChoices() {
 
     if (data.userChoice.length == 1) {
@@ -97,22 +103,27 @@ function previousChoices() {
     };
 };
 
-function populateUserHistoryDisplay(){
-    var lastFiveUserRounds = "";
-    var arrayLen = data.userChoice.length;
-    var limitOfFive = data.userChoice.length > 5 ? 0 : data.userChoice.length-5;
-    for (i = data.userChoice.length-1; i > limitOfFive; i--) { 
-        lastFiveUserRounds += "<p>" + data.userChoice[i] + "</p>";
-      }
+// ???
+function populateUserHistoryDisplay(){ 
+    let lastFiveUserRounds = "";
+    let limitOfFive = data.userChoice.length > 5 ? 0 : data.userChoice.length - 5;
+    for (i = data.userChoice.length - 1; i > limitOfFive; i--) {
+        if (data.userChoice[i] === 'undefined') {
+            lastFiveUserRounds += "<p>" + "No previous choice" + "</p>";
+        } else {
+            lastFiveUserRounds += "<p>" + data.userChoice[i] + "</p>";
+        }
+    };
     return lastFiveUserRounds;
-}
+};
 
+// ???
 function populateCompHistoryDisplay(){
     var lastFiveCompRounds = "";
     var arrayLen = data.computerChoice.length;
     var limitOfFive = data.computerChoice.length > 5 ? 0 : data.computerChoice.length-5;
     for (i = data.computerChoice.length-1; i > limitOfFive; i--) { 
         lastFiveCompRounds += "<p>" + data.computerChoice[i] + "</p>";
-      }
+      };
     return lastFiveCompRounds;
-}
+};
