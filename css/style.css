@@ -1,11 +1,17 @@
-#title{
+/* #title{
   font-family: 'Schoolbell', cursive;
   text-align: center;
   
-}
+} */
+
 .container{
   font-family: 'Open Sans', sans-serif;
-  background-color: #70CFC1;
+  background-color: #2DBADB;
+}
+
+.col-centered{
+  float: none;
+  margin: 0 auto;
 }
 
 .gameplay{
