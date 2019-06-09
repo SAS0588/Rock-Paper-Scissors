@@ -29,7 +29,7 @@ function controller(x) {
 
 // grabs user's button choice
 function setUserChoice(x) {
-    data.userChoice[data.userChoice.length] = x.id; // this passes in the id of the html dom element button as a STRING.
+    data.userChoice.push(x.id); // this passes in the id of the html dom element button as a STRING.
     return x.id;
 }
 
@@ -106,8 +106,8 @@ function previousChoices() {
 // ???
 function populateUserHistoryDisplay(){ 
     let lastFiveUserRounds = "";
-    let limitOfFive = data.userChoice.length > 5 ? 0 : data.userChoice.length - 5;
-    for (i = data.userChoice.length - 1; i > limitOfFive; i--) {
+    const limitOfFive = data.userChoice.length > 5 ? data.userChoice.length - 5 : 0;
+    for (i = data.userChoice.length - 1; i >= limitOfFive; i--) {
         if (data.userChoice[i] === 'undefined') {
             lastFiveUserRounds += "<p>" + "No previous choice" + "</p>";
         } else {
@@ -119,10 +119,9 @@ function populateUserHistoryDisplay(){
 
 // ???
 function populateCompHistoryDisplay(){
-    var lastFiveCompRounds = "";
-    var arrayLen = data.computerChoice.length;
-    var limitOfFive = data.computerChoice.length > 5 ? 0 : data.computerChoice.length-5;
-    for (i = data.computerChoice.length-1; i > limitOfFive; i--) { 
+    let lastFiveCompRounds = "";
+    const limitOfFive = data.computerChoice.length > 5 ? data.computerChoice.length-5 : 0;
+    for (i = data.computerChoice.length-1; i >= limitOfFive; i--) { 
         lastFiveCompRounds += "<p>" + data.computerChoice[i] + "</p>";
       };
     return lastFiveCompRounds;
